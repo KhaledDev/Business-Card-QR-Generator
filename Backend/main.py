@@ -53,11 +53,15 @@ def upload_img(_business_name):
             "image_link": storage.child(_business_name + "/" + file.filename).get_url(None),
         }
         
-        sent_JSON = json.dumps(JSON_obj)
+        with open(_business_name + "-" + file.filename + '.json', 'w', encoding='utf-8') as f:
+            json.dump(JSON_obj, f, ensure_ascii=False, indent=4)
+            f.close()
         
-        print("Created JSON file \n" + sent_JSON)
+        print("Created JSON file")
         
-        storage.child(_business_name + "/" + file.filename + ".json").put(sent_JSON)
+        storage.child(_business_name + "/" + file.filename.replace(".png","") + ".json").put(_business_name + "-" + file.filename + '.json')
+        
+        os.remove(_business_name + "-" + file.filename + '.json')
         
         return f"File has been uploaded successfully: {file.filename}"
     else:
@@ -67,10 +71,21 @@ def upload_img(_business_name):
 def get_img(_business_name,_filename):
     # TODO: Check if the requested filename and business are in the cache
     #       If not then call a request and cache it. If they are cached then return the JSON Object.
-    img_link = storage.child(_business_name + "/" + _filename).get_url(None)
+    # THIS DOES NOT WORK.
+    # UPDATE THIS WORKS!!!!
+    storage.child(_business_name + "/" + _filename).download(_filename)
     
-    # TODO: Change this from redirecting to just returning the JSON because the frontend will handle opening the image
-    return redirect(img_link) # don't really like it this way much. But it works.
+    json_details : str
+    
+    with open(_filename, 'r', encoding='utf-8') as f:
+        json_details = f.read()
+        f.close()
+    
+    print(json_details)
+    
+    os.remove(_filename)
+    
+    return json_details # don't really like it this way much. But it works.
 
 def handle_cached():
     pass # TODO: Implement cache handling
