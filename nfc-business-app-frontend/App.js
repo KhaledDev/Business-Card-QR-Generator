@@ -1,17 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, TouchableOpacity,Image, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity,Image, View, SafeAreaView } from 'react-native';
+import UploadImage from './components/UploadImage';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}t>Scan your NFC card</Text>
       <StatusBar style="auto"/>
+      <Text style={styles.text}t>Scan your NFC card</Text>
       
-      <Image styles={styles.image} source={require('./assets/contactless.png')} />
+      <SafeAreaView style={styles.safeareacontainer}>
+          <Image style={styles.NFCimage} source={require('./assets/contactless.png')} />
+      </SafeAreaView>
       
-      <TouchableOpacity style={styles.import_btn}>
-        <Text>Import card</Text>
-      </TouchableOpacity>
+      <UploadImage />
     </View>
   );
 }
@@ -27,16 +28,16 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
   },
-  image: {
-    width: 25,
-    height: 25,
-    resizeMode: "stretch",
+  safeareacontainer: {
+    flex: 0,
+    width: 100,
+    height: 100,
   },
-  import_btn: {
-    backgroundColor: '#bde0fe',
-    padding: 10,
-    borderRadius: 10,
-    alignItems: 'center',
-    marginTop: 50,
-  }
+  NFCimage: {
+    flex: 1,
+    width: 100,
+    height: 100,
+    resizeMode: "contain",
+  },
+  
 });

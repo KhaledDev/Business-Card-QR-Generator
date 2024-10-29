@@ -40,6 +40,7 @@ def upload_img(_business_name):
         return "no filename"
     
     if file and allowed_file(file.filename):
+        print("attempt")
         #file.save(file.filename) # we will handle saving here.
         storage.child(_business_name + "/" + file.filename).put(file)
         
