@@ -21,6 +21,7 @@ const UploadImage = () => {
             allowsEditing: true,
             aspect: [4, 3],
             quality: 1,
+            base64: true
         })
         
         if (!result.canceled){
@@ -28,11 +29,39 @@ const UploadImage = () => {
             setfile(result.assets[0]);
         }
         
-        await HandleUpload(result.assets[0]);
+        await HandleUpload();
     };
     
-    const HandleUpload = async (_result) => {
-        Backend.upload_img(_result);
+    const HandleUpload = async () => {
+        // Backend.upload_img(_result);
+        alert("uploading image");
+        if (!file) {
+            Alert.alert('Please select an image first!');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('file', {
+            uri: file.uri,
+            base64: file.base64,
+            type: file.type || 'image/jpeg', // Use a fallback type
+        });
+        
+        try {
+            const response = await fetch('http://127.0.0.1:5000/KhaledDev/upload_img', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            const data = await response.json();
+            Alert.alert('Response', data.message);
+        } catch (error) {
+            console.error('Error uploading image:', error);
+            Alert.alert('Upload failed');
+        }
     }
     
     return(

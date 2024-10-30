@@ -12,7 +12,7 @@ const upload_img = async (file) => {
     console.log("chose a filename: " + fileName);
     const fileUri = file.uri;
     console.log("Chose a file URI: " + fileUri);
-    const fileType = file.mimeType;
+    const fileType = file.type;
     console.log("Chose a file type: " + fileType);
     
     // Create FormData to send to the backend
@@ -23,16 +23,14 @@ const upload_img = async (file) => {
         type: fileType, // Make sure this is the correct type based on the image selected
     });
     
-    console.log("Created form data");
-    
     try {
         // Send the POST request to the Flask server
         const response = await fetch('http://127.0.0.1:5000/KhaledDev/upload_img', {
             method: 'POST',
-            headers: {
-                "Content-Type": "multipart/form-data",
-            },
             body: formData, // Do not set Content-Type, let fetch handle it
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
         });
 
         // Get the response text from the server

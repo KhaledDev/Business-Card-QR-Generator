@@ -31,16 +31,20 @@ def allowed_file(filename):
 
 @app.route("/<_business_name>/upload_img", methods=["POST"])
 def upload_img(_business_name):
+    print("attempting")
     if 'file' not in request.files:
         return "no file part in the request"
+
+    file = request.files.get('file')
+    print("got file part " + file.filename)
     
-    file = request.files['file']
+    if file == None:
+        return "no file was recived in the request"
     
     if file.filename == '':
         return "no filename"
-    
     if file and allowed_file(file.filename):
-        print("attempt")
+        print("file allowed")
         #file.save(file.filename) # we will handle saving here.
         storage.child(_business_name + "/" + file.filename).put(file)
         
