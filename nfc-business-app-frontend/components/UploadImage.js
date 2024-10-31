@@ -39,7 +39,7 @@ const UploadImage = () => {
         }
         const base64Image = file.base64;
         try {
-            const response = await fetch('https://b4ca-83-110-122-120.ngrok-free.app/KhaledDev/upload_img', {
+            const response = await fetch('https://NGROK_LINK_HERE/KhaledDev/upload_img', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
