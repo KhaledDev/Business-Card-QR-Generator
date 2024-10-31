@@ -1,8 +1,11 @@
-from flask import Flask, request, send_from_directory, redirect, url_for, render_template
+from flask import Flask, request, send_from_directory, redirect, url_for, render_template, jsonify
 from werkzeug.utils import secure_filename
 import os
 import firebase
 import json
+import base64
+import io
+from PIL import Image
 import threading # Will be used later on to handle cached images.
 
 app = Flask("Test")
@@ -31,6 +34,7 @@ def allowed_file(filename):
 
 @app.route("/<_business_name>/upload_img", methods=["POST"])
 def upload_img(_business_name):
+    '''
     print("attempting")
     if 'file' not in request.files:
         return "no file part in the request"
@@ -71,6 +75,57 @@ def upload_img(_business_name):
         return f"File has been uploaded successfully: {file.filename}"
     else:
         return "File type not supported"
+    '''
+    
+    data = request.get_json()
+    base64_image = data.get("image")
+    
+    print(data)
+    print(base64_image)
+    
+    if not base64_image:
+        return jsonify({"error": "No image provided"}), 400
+    
+    try:
+        # decode the base64 string to bytes
+        image_data = base64.b64decode(base64_image)
+        
+        # Convert bytes data to an image
+        image = Image.open(io.BytesIO(image_data))
+        
+        # Save the image to a temporary file
+        image.save("temp.png")
+        
+        # Upload the image to Firebase Storage
+        storage.child(_business_name + "/" + "temp.png").put("temp.png")
+        
+        os.remove("temp.png")
+        
+        # Create a JSON object that will be also sent to the storage with the image and it will have the image link.
+        # TODO: Test the JSON stuff.
+        JSON_obj = {
+            "Name" : "temp.png",
+            "Business" : _business_name,
+            "Type" : "image/png",
+            "Size" : os.path.getsize("temp.png"),
+            "image_link": storage.child(_business_name + "/" + "temp.png").get_url(None),
+        }
+        
+        with open(_business_name + "-" + "temp" + '.json', 'w', encoding='utf-8') as f:
+            json.dump(JSON_obj, f, ensure_ascii=False, indent=4)
+            f.close()
+        
+        print("Created JSON file")
+        
+        storage.child(_business_name + "/" + "temp.json").put(_business_name + "-" + "temp" + '.json')
+        
+        os.remove("temp" + '.json')
+        
+        return jsonify({"message": "File has been uploaded successfully"}), 200
+    
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    
 
 @app.route("/get_img/<_business_name>/<_filename>", methods=["GET"])
 def get_img(_business_name,_filename):

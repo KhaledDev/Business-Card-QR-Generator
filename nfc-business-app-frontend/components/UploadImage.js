@@ -17,7 +17,7 @@ const UploadImage = () => {
         }
         
         const result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
             aspect: [4, 3],
             quality: 1,
@@ -25,39 +25,34 @@ const UploadImage = () => {
         })
         
         if (!result.canceled){
-            console.log(result.assets[0]);
+            //console.log(result.assets[0]);
             setfile(result.assets[0]);
+            await HandleUpload();
         }
-        
-        await HandleUpload();
     };
     
     const HandleUpload = async () => {
         // Backend.upload_img(_result);
-        alert("uploading image");
         if (!file) {
             Alert.alert('Please select an image first!');
             return;
         }
-
-        const formData = new FormData();
-        formData.append('file', {
-            uri: file.uri,
-            base64: file.base64,
-            type: file.type || 'image/jpeg', // Use a fallback type
-        });
-        
+        const base64Image = file.base64;
         try {
-            const response = await fetch('http://127.0.0.1:5000/KhaledDev/upload_img', {
+            const response = await fetch('https://b4ca-83-110-122-120.ngrok-free.app/KhaledDev/upload_img', {
                 method: 'POST',
-                body: formData,
                 headers: {
-                    'Content-Type': 'multipart/form-data',
+                    'Content-Type': 'application/json',
                 },
-            });
-
-            const data = await response.json();
-            Alert.alert('Response', data.message);
+                body: JSON.stringify({
+                    image: base64Image
+                }),
+            })
+            .then(response => response.json())
+            .then(responseData => {
+                console.log(responseData);
+                alert(responseData);
+            })
         } catch (error) {
             console.error('Error uploading image:', error);
             Alert.alert('Upload failed');
