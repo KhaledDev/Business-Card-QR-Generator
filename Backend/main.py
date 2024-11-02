@@ -80,9 +80,6 @@ def upload_img(_business_name):
     data = request.get_json()
     base64_image = data.get("image")
     
-    print(data)
-    print(base64_image)
-    
     if not base64_image:
         return jsonify({"error": "No image provided"}), 400
     
@@ -99,29 +96,41 @@ def upload_img(_business_name):
         # Upload the image to Firebase Storage
         storage.child(_business_name + "/" + "temp.png").put("temp.png")
         
-        os.remove("temp.png")
         
         # Create a JSON object that will be also sent to the storage with the image and it will have the image link.
         # TODO: Test the JSON stuff.
+        
+        _size = os.path.getsize("temp.png")
+        _image_link = storage.child(_business_name + "/" + "temp.png").get_url(None)
+        
         JSON_obj = {
             "Name" : "temp.png",
             "Business" : _business_name,
             "Type" : "image/png",
-            "Size" : os.path.getsize("temp.png"),
-            "image_link": storage.child(_business_name + "/" + "temp.png").get_url(None),
+            "Size" : _size,
+            "image_link": _image_link,
         }
+        
+        _sendable_json : str
+        
+        os.remove("temp.png")
         
         with open(_business_name + "-" + "temp" + '.json', 'w', encoding='utf-8') as f:
             json.dump(JSON_obj, f, ensure_ascii=False, indent=4)
-            f.close()
+            
+        
+        # Read back the JSON file as a string for _sendable_json
+        with open(_business_name + "-" + "temp" + '.json', 'r', encoding='utf-8') as f:
+            fileContent = f.read()
+            _sendable_json = json.loads(fileContent)
         
         print("Created JSON file")
         
         storage.child(_business_name + "/" + "temp.json").put(_business_name + "-" + "temp" + '.json')
         
-        os.remove("temp" + '.json')
+        os.remove(_business_name + "-" + "temp.json")
         
-        return jsonify({"message": "File has been uploaded successfully"}), 200
+        return jsonify({"message": "File has been uploaded successfully", "file": _sendable_json}), 200
     
     except Exception as e:
         return jsonify({"error": str(e)}), 500
