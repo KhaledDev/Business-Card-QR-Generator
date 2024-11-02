@@ -1,0 +1,15 @@
+C:/Users/khali/OneDrive/Documents/Long-term-Projects/NFC_Business_App/Frontend/android/app/.cxx/Debug/u6t6m2yo/x86/CMakeFiles/appmodules.dir
+C:/Users/khali/OneDrive/Documents/Long-term-Projects/NFC_Business_App/Frontend/android/app/.cxx/Debug/u6t6m2yo/x86/CMakeFiles/edit_cache.dir
+C:/Users/khali/OneDrive/Documents/Long-term-Projects/NFC_Business_App/Frontend/android/app/.cxx/Debug/u6t6m2yo/x86/CMakeFiles/rebuild_cache.dir
+C:/Users/khali/OneDrive/Documents/Long-term-Projects/NFC_Business_App/Frontend/android/app/.cxx/Debug/u6t6m2yo/x86/RNReactNativeFsSpec_autolinked_build/CMakeFiles/react_codegen_RNReactNativeFsSpec.dir
+C:/Users/khali/OneDrive/Documents/Long-term-Projects/NFC_Business_App/Frontend/android/app/.cxx/Debug/u6t6m2yo/x86/RNReactNativeFsSpec_autolinked_build/CMakeFiles/edit_cache.dir
+C:/Users/khali/OneDrive/Documents/Long-term-Projects/NFC_Business_App/Frontend/android/app/.cxx/Debug/u6t6m2yo/x86/RNReactNativeFsSpec_autolinked_build/CMakeFiles/rebuild_cache.dir
+C:/Users/khali/OneDrive/Documents/Long-term-Projects/NFC_Business_App/Frontend/android/app/.cxx/Debug/u6t6m2yo/x86/RNImagePickerSpec_autolinked_build/CMakeFiles/react_codegen_RNImagePickerSpec.dir
+C:/Users/khali/OneDrive/Documents/Long-term-Projects/NFC_Business_App/Frontend/android/app/.cxx/Debug/u6t6m2yo/x86/RNImagePickerSpec_autolinked_build/CMakeFiles/edit_cache.dir
+C:/Users/khali/OneDrive/Documents/Long-term-Projects/NFC_Business_App/Frontend/android/app/.cxx/Debug/u6t6m2yo/x86/RNImagePickerSpec_autolinked_build/CMakeFiles/rebuild_cache.dir
+C:/Users/khali/OneDrive/Documents/Long-term-Projects/NFC_Business_App/Frontend/android/app/.cxx/Debug/u6t6m2yo/x86/RNPermissionsSpec_autolinked_build/CMakeFiles/react_codegen_RNPermissionsSpec.dir
+C:/Users/khali/OneDrive/Documents/Long-term-Projects/NFC_Business_App/Frontend/android/app/.cxx/Debug/u6t6m2yo/x86/RNPermissionsSpec_autolinked_build/CMakeFiles/edit_cache.dir
+C:/Users/khali/OneDrive/Documents/Long-term-Projects/NFC_Business_App/Frontend/android/app/.cxx/Debug/u6t6m2yo/x86/RNPermissionsSpec_autolinked_build/CMakeFiles/rebuild_cache.dir
+C:/Users/khali/OneDrive/Documents/Long-term-Projects/NFC_Business_App/Frontend/android/app/.cxx/Debug/u6t6m2yo/x86/rnsvg_autolinked_build/CMakeFiles/react_codegen_rnsvg.dir
+C:/Users/khali/OneDrive/Documents/Long-term-Projects/NFC_Business_App/Frontend/android/app/.cxx/Debug/u6t6m2yo/x86/rnsvg_autolinked_build/CMakeFiles/edit_cache.dir
+C:/Users/khali/OneDrive/Documents/Long-term-Projects/NFC_Business_App/Frontend/android/app/.cxx/Debug/u6t6m2yo/x86/rnsvg_autolinked_build/CMakeFiles/rebuild_cache.dir

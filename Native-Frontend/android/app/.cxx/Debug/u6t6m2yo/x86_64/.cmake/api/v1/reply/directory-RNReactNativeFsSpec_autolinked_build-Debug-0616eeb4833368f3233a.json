@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "RNReactNativeFsSpec_autolinked_build",
+		"source" : "C:/Users/khali/OneDrive/Documents/Long-term-Projects/NFC_Business_App/Frontend/node_modules/@dr.pogodin/react-native-fs/android/generated/jni"
+	}
+}
