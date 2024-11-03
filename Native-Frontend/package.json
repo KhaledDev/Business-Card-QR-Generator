@@ -1,5 +1,5 @@
 {
-  "name": "Frontend",
+  "name": "Native-Frontend",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@dr.pogodin/react-native-fs": "^2.29.1",
     "react": "18.3.1",
     "react-native": "0.76.1",
     "react-native-image-picker": "^7.1.2",
