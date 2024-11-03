@@ -53,7 +53,7 @@ const UploadImage = () => {
         }
 
         try {
-            const response = await fetch('https://8be1-83-110-122-120.ngrok-free.app/KhaledDev/upload_img', {
+            const response = await fetch('https://oriented-amazing-stork.ngrok-free.app/KhaledDev/upload_img', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

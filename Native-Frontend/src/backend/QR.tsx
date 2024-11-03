@@ -19,7 +19,7 @@ const QR = () => {
         console.log(json.file.image_link);
         setqrcodeLink(json.file.image_link);
         displayQR();
-        console.log("finsihed")
+        console.log("finished");
     }
     
     const displayQR = () => {
@@ -38,7 +38,6 @@ const QR = () => {
                 visible={showQR}
                 animationType= "fade"
                 transparent={true}
-                presentationStyle="pageSheet"
             >
                 <View style={
                         {

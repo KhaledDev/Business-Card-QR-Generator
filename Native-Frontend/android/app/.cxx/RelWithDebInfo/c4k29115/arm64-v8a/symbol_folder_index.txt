@@ -1,0 +1,1 @@
+C:\Users\khali\OneDrive\Documents\Long-term-Projects\NFC_Business_App\Native-Frontend\android\app\build\intermediates\cxx\RelWithDebInfo\c4k29115\obj\arm64-v8a
