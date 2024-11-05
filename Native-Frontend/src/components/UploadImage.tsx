@@ -51,7 +51,7 @@ const UploadImage = () => {
             Alert.alert('Selected image does not contain base64 data.');
             return;
         }
-
+        
         try {
             const response = await fetch('https://oriented-amazing-stork.ngrok-free.app/KhaledDev/upload_img', {
                 method: 'POST',
@@ -65,7 +65,7 @@ const UploadImage = () => {
 
             const responseData = await response.json();
             console.log(responseData);
-
+            Alert.alert('Upload successful');
             // After successful upload, save the response data to a JSON file
             await saveFile(responseData);
         } catch (error) {
@@ -76,7 +76,6 @@ const UploadImage = () => {
 
     // Save the uploaded image data to a file
     const saveFile = async (responseData: any) => {
-        const filename = responseData['file']['Name'].replace('.png', '.json');
         const fileUri = FileSystem.DocumentDirectoryPath + '/' + "user.json";
         
         FileSystem.writeFile(fileUri, JSON.stringify(responseData),'utf8')
@@ -86,19 +85,6 @@ const UploadImage = () => {
         .catch((err) =>{
             console.log(err.message);
         });
-        
-        /*
-        try {
-            await FileSystem.writeAsStringAsync(fileUri, JSON.stringify(responseData));
-            console.log('File saved successfully at:', fileUri);
-            // Optionally, trigger the NFC write operation here
-            // const nfcManager = WriteToNFC();
-            // nfcManager.writeToNFC();
-        } catch (error) {
-            console.error('Error saving file:', error);
-            Alert.alert('Error saving file');
-        }
-        */
     };
 
     return (
