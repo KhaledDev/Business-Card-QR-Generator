@@ -75,10 +75,36 @@ def upload_img(_business_name):
         return f"File has been uploaded successfully: {file.filename}"
     else:
         return "File type not supported"
+        
+        rules_version = '2';
+
+// Craft rules based on data in your Firestore database
+// allow write: if firestore.get(
+//    /databases/(default)/documents/users/$(request.auth.uid)).data.isAdmin;
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // This rule allows anyone with your Storage bucket reference to view, edit,
+    // and delete all data in your Storage bucket. It is useful for getting
+    // started, but it is configured to expire after 30 days because it
+    // leaves your app open to attackers. At that time, all client
+    // requests to your Storage bucket will be denied.
+    //
+    // Make sure to write security rules for your app before that time, or else
+    // all client requests to your Storage bucket will be denied until you Update
+    // your rules
+    match /{allPaths=**} {
+      allow read, write: if request.time < timestamp.date(2024, 11, 12);
+    }
+  }
+}
+        
     '''
     
     data = request.get_json()
     base64_image = data.get("image")
+    
+    print("got image data")
     
     if not base64_image:
         return jsonify({"error": "No image provided"}), 400
@@ -87,15 +113,20 @@ def upload_img(_business_name):
         # decode the base64 string to bytes
         image_data = base64.b64decode(base64_image)
         
+        print("image data decoded")
+        
         # Convert bytes data to an image
         image = Image.open(io.BytesIO(image_data))
         
         # Save the image to a temporary file
         image.save("temp.png")
         
+        print("image saved now uploading image to fire base.")
+        
         # Upload the image to Firebase Storage
         storage.child(_business_name + "/" + "temp.png").put("temp.png")
         
+        print("image uploaded")
         
         # Create a JSON object that will be also sent to the storage with the image and it will have the image link.
         # TODO: Test the JSON stuff.
